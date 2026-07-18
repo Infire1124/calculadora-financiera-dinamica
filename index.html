@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Patrimonial Global</title>
+    <meta name="description" content="Calculadora patrimonial global gratuita para proyecciones financieras, interés compuesto y planificación de ahorros.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col justify-between transition-all duration-300">
+
+<div id="particles-js"></div>
+
+    <!-- Encabezado -->
+    <header class="p-5 bg-slate-800 text-center border-b border-slate-700 shadow-lg">
+        <h1 id="lbl-titulo" class="text-3xl font-black tracking-tight text-emerald-400">Calculadora Patrimonial Global</h1>
+        <p id="lbl-subtitulo" class="text-slate-400 text-sm mt-1">Plataforma internacional para proyecciones financieras de alto rendimiento</p>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="container mx-auto p-4 md:p-6 max-w-6xl flex-grow">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- PANEL DE CONTROL (COLUMNA IZQUIERDA) -->
+            <section id="panel-control" class="lg:col-span-5 bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl space-y-5">
+                <h2 id="lbl-config-plan" class="text-lg font-bold text-emerald-400 border-b border-slate-700 pb-2 flex items-center gap-2">
+                    <span>🛠️</span> Configuración del Plan
+                </h2>
+
+                <!-- PANEL DE IDIOMA Y MONEDA -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-900 p-3 rounded-xl border border-slate-700/60">
+                    <div>
+                        <label id="lbl-idioma-app" class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Idioma de Interfaz</label>
+                        <select id="idiomaApp" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white font-bold text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none cursor-pointer">
+                            <option value="es" selected>Español (ES)</option>
+                            <option value="en">English (EN)</option>
+                            <option value="pt">Português (PT)</option>
+                            <option value="ru">Русский (RU)</option>
+                            <option value="ar">العربية (AR)</option>
+                            <option value="hi">हिन्दी (HI - India)</option>
+                            <option value="zh">中文 (ZH - China)</option>
+                            <option value="zh-tw">繁體中文 (ZH - Taiwan)</option>
+                            <option value="ja">日本語 (JA)</option>
+                            <option value="ko">한국어 (KO)</option>
+                            <option value="uk">Українська (UK)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label id="lbl-moneda-base" class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Moneda de Inversión</label>
+                        <select id="moneda" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white font-bold text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none cursor-pointer">
+                            <option value="USD" selected>Dólar (USD)</option>
+                            <option value="EUR">Euro (EUR)</option>
+                            <option value="GBP">Libra Esterlina (GBP)</option>
+                            <option value="JPY">Yen Japonés (JPY)</option>
+                            <option value="CNY">Yuan Chino (CNY)</option>
+                            <option value="INR">Rupia India (INR)</option>
+                            <option value="RUB">Rublo Ruso (RUB)</option>
+                            <option value="UAH">Grivna Ucraniana (UAH)</option>
+                            <option value="BRL">Real Brasileño (BRL)</option>
+                            <option value="KRW">Won Surcoreano (KRW)</option>
+                            <option value="COP">Peso Colombiano (COP)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Inversión Inicial -->
+                <div>
+                    <label id="lbl-inv-inicial" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Inversión Inicial</label>
+                    <div class="relative">
+                        <span id="badge-moneda-inicial" class="absolute left-3 top-2.5 text-slate-500 font-bold label-moneda">USD</span>
+                        <input type="number" id="invInicial" value="1000" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 pl-16 pr-4 text-white font-bold text-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <!-- Fases de Aportes -->
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-700/50 space-y-4">
+                    <h3 id="lbl-aportes-fases" class="text-xs font-bold text-slate-400 uppercase tracking-widest">Aportes Mensuales por Fases</h3>
+                    
+                    <div>
+                        <div class="flex justify-between text-sm mb-1 items-center">
+                            <span id="lbl-fase1" class="text-slate-300">Fase 1 (Años 1-5):</span>
+                            <span class="font-mono font-bold text-emerald-400" id="valFase1">100 USD</span>
+                        </div>
+                        <input type="range" id="fase1" min="0" max="1000000" step="50" value="100" class="w-full accent-emerald-500 bg-slate-700 h-2 rounded-lg cursor-pointer">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm mb-1 items-center">
+                            <span id="lbl-fase2" class="text-slate-300">Fase 2 (Años 6-13):</span>
+                            <span class="font-mono font-bold text-emerald-400" id="valFase2">200 USD</span>
+                        </div>
+                        <input type="range" id="fase2" min="0" max="1000000" step="50" value="200" class="w-full accent-emerald-500 bg-slate-700 h-2 rounded-lg cursor-pointer">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm mb-1 items-center">
+                            <span id="lbl-fase3" class="text-slate-300">Fase 3 (Años 14-30):</span>
+                            <span class="font-mono font-bold text-emerald-400" id="valFase3">300 USD</span>
+                        </div>
+                        <input type="range" id="fase3" min="0" max="1000000" step="50" value="300" class="w-full accent-emerald-500 bg-slate-700 h-2 rounded-lg cursor-pointer">
+                    </div>
+                </div>
+
+                <!-- Aportes Adicionales -->
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-700/50 space-y-4">
+                    <h3 id="lbl-aportes-extra" class="text-xs font-bold text-slate-400 uppercase tracking-widest">Aportes Adicionales / Extra</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label id="lbl-frecuencia" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Frecuencia</label>
+                            <select id="frecuenciaExtra" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white font-bold text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none cursor-pointer"></select>
+                        </div>
+                        <div>
+                            <label id="lbl-monto-extra" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Monto del Aporte</label>
+                            <div class="relative">
+                                <span id="badge-moneda-extra" class="absolute left-2 top-2 text-xs text-slate-500 font-bold label-moneda">USD</span>
+                                <input type="number" id="montoExtra" value="500" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 pl-12 pr-2 text-white font-bold text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Parámetros Numéricos -->
+                <div class="grid grid-cols-3 gap-3">
+                    <div>
+                        <label id="lbl-anos-simular" class="block text-[10px] uppercase tracking-wider text-slate-400 mb-2 font-medium">Años a simular</label>
+                        <input type="number" id="anos" value="30" min="1" max="50" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-center font-bold text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label id="lbl-interes-anual" class="block text-[10px] uppercase tracking-wider text-slate-400 mb-2 font-medium">Interés Anual (%)</label>
+                        <input type="number" id="interes" value="9" min="0" max="100" step="0.1" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-center font-bold text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label id="lbl-inflacion-anual" class="block text-[10px] uppercase tracking-wider text-slate-400 mb-2 font-medium">Inflación (%)</label>
+                        <input type="number" id="inflacion" value="3.5" min="0" max="50" step="0.1" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-center font-bold text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <!-- Botones de Acción -->
+                <div class="flex gap-4 pt-2">
+                    <button id="btnCalcular" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl shadow-lg transition duration-200 uppercase tracking-wider text-sm">
+                        Calcular
+                    </button>
+                    <button id="btnReiniciar" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded-xl shadow-lg transition duration-200 uppercase tracking-wider text-sm">
+                        Reiniciar
+                    </button>
+                </div>
+             <!-- Botón principal para abrir/cerrar tabla -->
+<button id="btnExportar" class="w-full bg-slate-700 hover:bg-emerald-700 border border-slate-600 py-3 rounded-xl font-bold uppercase tracking-widest text-xs transition duration-300 mt-4">
+    📊 Ver Tabla / Exportar CSV
+</button>
+
+<!-- Contenedor para la tabla y el nuevo menú -->
+<div id="contenedorTabla" class="hidden mt-6 bg-slate-950 p-4 rounded-xl border border-slate-700 relative">
+    
+    <!-- Botón de Menú (☰) y Menú desplegable -->
+    <div class="absolute top-2 right-2 z-20">
+        <button id="btnMenuAcciones" class="text-slate-400 hover:text-white p-2 bg-slate-800 rounded-lg border border-slate-600">☰</button>
+       <!-- Copia esto exactamente y reemplaza desde la línea 158 a la 165 -->
+<div id="menuAcciones" class="hidden absolute right-0 mt-2 w-40 bg-slate-800 border border-slate-700 rounded-lg shadow-xl z-50">
+    <button id="btnDescargarCSV" class="block w-full text-left px-4 py-2 text-xs text-slate-300 hover:bg-emerald-700 hover:text-white border-b border-slate-700">Descargar CSV</button>
+    <button id="btnDescargarXLS" class="block w-full text-left px-4 py-2 text-xs text-slate-300 hover:bg-emerald-700 hover:text-white border-b border-slate-700">Descargar Excel (XLS)</button>
+    <button id="btnDescargarPDF" class="block w-full text-left px-4 py-2 text-xs text-slate-300 hover:bg-emerald-700 hover:text-white border-b border-slate-700">Descargar PDF</button>
+    <button id="btnCerrarTabla" class="block w-full text-left px-4 py-2 text-xs text-slate-300 hover:bg-red-700 hover:text-white">Cerrar Tabla</button>
+</div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="overflow-x-auto max-h-64 overflow-y-auto mt-8">
+        <table class="w-full text-left text-xs text-slate-300">
+            <thead class="border-b border-slate-700 text-emerald-400">
+                <tr><th class="p-2">Año</th><th class="p-2">Patrimonio</th><th class="p-2">Depósitos</th></tr>
+            </thead>
+            <tbody id="cuerpoTabla"></tbody>
+        </table>
+    </div>
+</div>
+            </section>
+
+            <!-- VISUALIZACIÓN Y RESULTADOS (COLUMNA DERECHA) -->
+            <section id="panel-resultados" class="lg:col-span-7 flex flex-col gap-6">
+                <!-- Tarjetas KPI -->
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+                    <div class="p-3 bg-slate-900 rounded-xl border border-slate-700/40">
+                        <p id="lbl-patrimonio-futuro" class="text-xs uppercase tracking-wider text-slate-400 font-medium">Patrimonio Estimado (Futuro)</p>
+                        <h3 class="text-xl md:text-2xl font-black text-emerald-400 mt-1 font-mono" id="resTotal">$0.00</h3>
+                    </div>
+                    <div class="p-3 bg-slate-900 rounded-xl border border-slate-700/40">
+                        <p id="lbl-retiro-seguro" class="text-xs uppercase tracking-wider text-slate-400 font-medium">Retiro Mensual Seguro (4%)</p>
+                        <h3 class="text-xl md:text-2xl font-black text-cyan-400 mt-1 font-mono" id="resRetiro">$0.00</h3>
+                    </div>
+                </div>
+            <!-- NUEVO BLOQUE: ESCENARIOS DE ESTRÉS -->
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl text-center">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Análisis de Sensibilidad (Escenarios)</h3>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="p-3 bg-red-900/10 rounded-xl border border-red-900/30">
+                            <p class="text-[9px] uppercase text-red-400 font-bold">Pesimista</p>
+                            <span id="resPesimista" class="text-sm font-bold font-mono text-red-300">$0.00</span>
+                        </div>
+                        <div class="p-3 bg-slate-900 rounded-xl border border-slate-700">
+                            <p class="text-[9px] uppercase text-slate-400 font-bold">Base</p>
+                            <span id="resBase" class="text-sm font-bold font-mono text-slate-200">$0.00</span>
+                        </div>
+                        <div class="p-3 bg-emerald-900/10 rounded-xl border border-emerald-900/30">
+                            <p class="text-[9px] uppercase text-emerald-400 font-bold">Optimista</p>
+                            <span id="resOptimista" class="text-sm font-bold font-mono text-emerald-300">$0.00</span>
+                        </div>
+                    </div>
+                </div>    
+
+                <!-- Gráfico y Bloque Mensaje Informativo -->
+                <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700 shadow-xl flex flex-col justify-center">
+                    <h3 id="lbl-proyeccion-graf" class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Proyección Internacional del Capital</h3>
+                    
+                    <div class="relative w-full h-64 md:h-80">
+                        <canvas id="graficoPatrimonio"></canvas>
+                    </div>
+
+                    <!-- Mensaje Informativo Rediseñado -->
+                    <div id="contenedorMensajes" class="hidden mt-6 bg-slate-900/90 p-6 rounded-xl border border-emerald-500/30 shadow-2xl tracking-wide">
+                        <h2 id="msgTituloResultado" class="text-center text-lg font-bold text-emerald-400 mb-4 uppercase tracking-widest font-sans">
+                            Resumen de la Proyección Financiera
+                        </h2>
+                        <div class="text-center text-base text-slate-200 mb-6 font-medium flex flex-wrap justify-center items-center gap-2">
+                            <span id="msgEn">Bajo este esquema de simulación a</span> 
+                            <span id="resAnios" class="bg-slate-950 px-3 py-1.5 rounded-lg text-emerald-400 font-black border border-slate-800">30</span> 
+                            <span id="msgAniosTendras">años, tu capital proyectado asciende a</span> 
+                            <span id="resMonto" class="bg-slate-950 px-3 py-1.5 rounded-lg font-mono text-cyan-400 font-black border border-slate-800">$0.00</span>
+                        </div>
+                        <hr class="border-slate-800 mb-4">
+                        <p id="msgDescripcion1" class="text-xs text-slate-400 mb-3 leading-relaxed text-justify font-sans"></p>
+                        <p id="msgDescripcion2" class="text-xs text-slate-400 leading-relaxed text-justify font-sans"></p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+<section class="max-w-4xl mx-auto p-6 text-slate-300">
+    <h2 class="text-2xl font-bold text-white mb-4">¿Por qué usar nuestra Calculadora de Interés Compuesto?</h2>
+    <p class="mb-4">
+        La planificación financiera es el primer paso hacia la libertad económica. El interés compuesto es conocido como la "octava maravilla del mundo" porque permite que tu dinero trabaje para ti de forma exponencial. Nuestra herramienta te ayuda a visualizar cómo pequeñas aportaciones constantes, combinadas con una estrategia de ahorro inteligente, pueden transformar tu futuro patrimonial.
+    </p>
+    <p>
+        Al proyectar tu capital a largo plazo, puedes ajustar variables clave como la tasa de retorno, la inflación y la frecuencia de tus inversiones, permitiéndote tomar decisiones informadas sobre tu jubilación o metas de ahorro a mediano y largo plazo.
+    </p>
+</section>
+
+    <footer id="lbl-footer" class="p-6 bg-slate-950 text-center text-slate-500 text-xs border-t border-slate-800 mt-8">
+    <p>Calculadora Patrimonial Global Inteligente • Soporte Multidivisa Internacional Independiente</p>
+    <p class="mt-2 text-slate-400 font-semibold">
+        Creado por Leandro Rodriguez Dulcey - © 2026
+    </p>
+</footer>
+    <!-- Botón Flotante Volver al Inicio -->
+    <button id="btnVolverArriba" class="fixed bottom-6 right-6 hidden bg-slate-800 border border-slate-600 text-slate-300 px-4 py-3 rounded-lg shadow-2xl hover:bg-emerald-700 hover:text-white transition-all duration-300 flex items-center gap-2 z-50 font-bold uppercase text-xs tracking-widest">
+        <span>▲</span> Volver al inicio
+    </button>
+
+    <script src="app.js"></script>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>particlesJS.load('particles-js', 'https://api.jsonbin.io/v3/b/6699a777ad19ca34f8841b9d', function(){});</script>
+</body>
+</html>
