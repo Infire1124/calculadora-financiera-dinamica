@@ -1,9 +1,53 @@
-#particles-js {
-    position: fixed;
-    width: 100%;
-    height: 100vh; /* Asegura que solo ocupe la altura de la pantalla */
-    top: 0;
-    left: 0;
-    z-index: -1;
-    background-color: #0f172a; /* Azul muy oscuro, mejora el contraste */
+/* 1. Estilos base globales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+/* Aseguramos que el html y body ocupen todo el alto de la vista */
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Inter', sans-serif; /* Asumiendo que usas Inter o una sans-serif similar */
+    background-color: #0f172a; /* Azul marino oscuro muy profesional (Slate 900) */
+    color: #f1f5f9; /* Texto principal claro (Slate 100) */
+    overflow-x: hidden; /* Previene barras de desplazamiento horizontales */
+}
+
+/* 2. Eliminamos el contenedor de partículas antiguo */
+#particles-js {
+    display: none; /* Esto oculta completamente la animación */
+}
+
+/* 3. Contenedor principal de la aplicación */
+.min-h-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* Eliminamos cualquier padding-top o margen superior grande */
+    padding-top: 1rem; /* Solo un pequeño respiro arriba */
+    padding-bottom: 2rem;
+}
+
+/* 4. Ajustes de la interfaz (Header y Main) */
+/* Aseguramos que el encabezado tenga un fondo sólido para separar del body si es necesario */
+header {
+    background-color: #1e293b; /* Un tono ligeramente más claro que el body (Slate 800) */
+    padding: 1rem 0;
+    border-bottom: 1px solid #334155;
+}
+
+main {
+    flex: 1; /* Hace que el main ocupe el espacio disponible */
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- OTROS ESTILOS NECESARIOS PARA LA INTERFAZ (helpers de Tailwind) --- */
+/* Asegúrate de que estos estén disponibles o añádelos al final de tu CSS si no usas Tailwind */
+.bg-slate-900 { background-color: #0f172a; }
+.bg-slate-800 { background-color: #1e293b; }
+.text-emerald-400 { color: #4ade80; } /* Verde neón para títulos */
+.text-slate-100 { color: #f1f5f9; } /* Texto claro */
+.text-slate-400 { color: #94a3b8; } /* Texto secundario */
