@@ -4,6 +4,6 @@
     height: 100%;
     top: 0;
     left: 0;
-    z-index: -1; /* Esto lo envía al fondo, detrás de todo */
-    background-color: █#0b1120;
-    }
+    z-index: -1;
+    background-color: #0b1120; /* Este es tu fondo oscuro */
+}
