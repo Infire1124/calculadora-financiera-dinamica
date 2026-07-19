@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador de Inversión Global | Calculadora Patrimonial</title>
@@ -20,7 +19,7 @@
 <body class="text-slate-100 font-sans min-h-screen flex flex-col justify-between transition-all duration-300">
 
 
-<div id="particles-js"></div>
+
 
     <!-- Encabezado -->
     <header class="p-5 bg-slate-800 text-center border-b border-slate-700 shadow-lg">
@@ -118,7 +117,12 @@
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label id="lbl-frecuencia" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Frecuencia</label>
-                            <select id="frecuenciaExtra" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white font-bold text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none cursor-pointer"></select>
+                            <select id="frecuenciaExtra" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white font-bold text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none cursor-pointer">
+                                <option value="mensual">Mensual</option>
+                                <option value="trimestral">Trimestral</option>
+                                <option value="anual">Anual</option>
+                            </select>
+
                         </div>
                         <div>
                             <label id="lbl-monto-extra" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Monto del Aporte</label>
