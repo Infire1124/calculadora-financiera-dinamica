@@ -283,15 +283,15 @@ function calcularProyeccion() {
 btnCalcular.addEventListener('click', calcularProyeccion);
 
 btnReiniciar.addEventListener('click', () => {
-    inputInvInicial.value = 1000;
-    sliderFase1.value = 100;
-    sliderFase2.value = 200;
-    sliderFase3.value = 300;
+    inputInvInicial.value = 0;
+    sliderFase1.value = 0;
+    sliderFase2.value = 0;
+    sliderFase3.value = 0;
     selectFrecuenciaExtra.value = "999";
-    inputMontoExtra.value = 500;
-    inputAnos.value = 30;
-    inputInteres.value = 9;
-    inputInflacion.value = 3.5;
+    inputMontoExtra.value = 0;
+    inputAnos.value = 0;
+    inputInteres.value = 0;
+    inputInflacion.value = 0;
     
     contenedorMensajes.classList.add('hidden');
     localizarInterfaz();
