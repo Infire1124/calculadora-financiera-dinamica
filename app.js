@@ -519,3 +519,6 @@ btnVolver.addEventListener('click', () => {
         behavior: 'smooth'
     });
 });
+// Carga Inicial Limpia
+localizarInterfaz();
+calcularProyeccion();
