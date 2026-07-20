@@ -1,25 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador de Inversión Global | Calculadora Patrimonial</title>
-    
-    <!-- Etiquetas para SEO -->
     <meta name="description" content="Calculadora financiera dinámica para realizar proyecciones y análisis de patrimonio de forma sencilla y eficiente.">
     <meta name="keywords" content="calculadora financiera, proyecciones patrimoniales, finanzas personales, gestión financiera">
-    
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js -->
-    
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
-
-
-
 
     <!-- Encabezado -->
     <header class="p-5 bg-slate-800 text-center border-b border-slate-700 shadow-lg">
@@ -28,16 +18,15 @@
     </header>
 
     <!-- Contenido Principal -->
-    <main class="container mx-auto pt-4 pb-6 max-w-6xl flex-grow">
+    <main class="w-full max-w-6xl mx-auto pt-4 pb-6 flex-grow px-4">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             
-            <!-- PANEL DE CONTROL (COLUMNA IZQUIERDA) -->
+            <!-- PANEL DE CONTROL -->
             <section id="panel-control" class="lg:col-span-5 bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl space-y-5">
                 <h2 id="lbl-config-plan" class="text-lg font-bold text-emerald-400 border-b border-slate-700 pb-2 flex items-center gap-2">
                     <span>🛠️</span> Configuración del Plan
                 </h2>
 
-                <!-- PANEL DE IDIOMA Y MONEDA -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-900 p-3 rounded-xl border border-slate-700/60">
                     <div>
                         <label id="lbl-idioma-app" class="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Idioma de Interfaz</label>
@@ -73,7 +62,6 @@
                     </div>
                 </div>
 
-                <!-- Inversión Inicial -->
                 <div>
                     <label id="lbl-inv-inicial" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Inversión Inicial</label>
                     <div class="relative">
@@ -82,10 +70,8 @@
                     </div>
                 </div>
 
-                <!-- Fases de Aportes -->
                 <div class="bg-slate-900 p-4 rounded-xl border border-slate-700/50 space-y-4">
                     <h3 id="lbl-aportes-fases" class="text-xs font-bold text-slate-400 uppercase tracking-widest">Aportes Mensuales por Fases</h3>
-                    
                     <div>
                         <div class="flex justify-between text-sm mb-1 items-center">
                             <span id="lbl-fase1" class="text-slate-300">Fase 1 (Años 1-5):</span>
@@ -93,7 +79,6 @@
                         </div>
                         <input type="range" id="fase1" min="0" max="1000000" step="50" value="100" class="w-full accent-emerald-500 bg-slate-700 h-2 rounded-lg cursor-pointer">
                     </div>
-
                     <div>
                         <div class="flex justify-between text-sm mb-1 items-center">
                             <span id="lbl-fase2" class="text-slate-300">Fase 2 (Años 6-13):</span>
@@ -101,7 +86,6 @@
                         </div>
                         <input type="range" id="fase2" min="0" max="1000000" step="50" value="200" class="w-full accent-emerald-500 bg-slate-700 h-2 rounded-lg cursor-pointer">
                     </div>
-
                     <div>
                         <div class="flex justify-between text-sm mb-1 items-center">
                             <span id="lbl-fase3" class="text-slate-300">Fase 3 (Años 14-30):</span>
@@ -111,7 +95,6 @@
                     </div>
                 </div>
 
-                <!-- Aportes Adicionales -->
                 <div class="bg-slate-900 p-4 rounded-xl border border-slate-700/50 space-y-4">
                     <h3 id="lbl-aportes-extra" class="text-xs font-bold text-slate-400 uppercase tracking-widest">Aportes Adicionales / Extra</h3>
                     <div class="grid grid-cols-2 gap-3">
@@ -122,7 +105,6 @@
                                 <option value="trimestral">Trimestral</option>
                                 <option value="anual">Anual</option>
                             </select>
-
                         </div>
                         <div>
                             <label id="lbl-monto-extra" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Monto del Aporte</label>
@@ -134,7 +116,6 @@
                     </div>
                 </div>
 
-                <!-- Parámetros Numéricos -->
                 <div class="grid grid-cols-3 gap-3">
                     <div>
                         <label id="lbl-anos-simular" class="block text-[10px] uppercase tracking-wider text-slate-400 mb-2 font-medium">Años a simular</label>
@@ -150,50 +131,34 @@
                     </div>
                 </div>
 
-                <!-- Botones de Acción -->
                 <div class="flex gap-4 pt-2">
-                    <button id="btnCalcular" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl shadow-lg transition duration-200 uppercase tracking-wider text-sm">
-                        Calcular
-                    </button>
-                    <button id="btnReiniciar" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded-xl shadow-lg transition duration-200 uppercase tracking-wider text-sm">
-                        Reiniciar
-                    </button>
+                    <button id="btnCalcular" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl shadow-lg transition duration-200 uppercase tracking-wider text-sm">Calcular</button>
+                    <button id="btnReiniciar" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded-xl shadow-lg transition duration-200 uppercase tracking-wider text-sm">Reiniciar</button>
                 </div>
-             <!-- Botón principal para abrir/cerrar tabla -->
-<button id="btnExportar" class="w-full bg-slate-700 hover:bg-emerald-700 border border-slate-600 py-3 rounded-xl font-bold uppercase tracking-widest text-xs transition duration-300 mt-4">
-    📊 Ver Tabla / Exportar CSV
-</button>
+                <button id="btnExportar" class="w-full bg-slate-700 hover:bg-emerald-700 border border-slate-600 py-3 rounded-xl font-bold uppercase tracking-widest text-xs transition duration-300 mt-4">📊 Ver Tabla / Exportar CSV</button>
 
-<!-- Contenedor para la tabla y el nuevo menú -->
-<div id="contenedorTabla" class="hidden mt-6 bg-slate-950 p-4 rounded-xl border border-slate-700 relative">
-    
-    <!-- Botón de Menú (☰) y Menú desplegable -->
-    <div class="absolute top-2 right-2 z-20">
-        <button id="btnMenuAcciones" class="text-slate-400 hover:text-white p-2 bg-slate-800 rounded-lg border border-slate-600">☰</button>
-       <!-- Copia esto exactamente y reemplaza desde la línea 158 a la 165 -->
-<div id="menuAcciones" class="hidden absolute right-0 mt-2 w-40 bg-slate-800 border border-slate-700 rounded-lg shadow-xl z-50">
-    <button id="btnDescargarCSV" class="block w-full text-left px-4 py-2 text-xs text-slate-300 hover:bg-emerald-700 hover:text-white border-b border-slate-700">Descargar CSV</button>
-    <button id="btnDescargarXLS" class="block w-full text-left px-4 py-2 text-xs text-slate-300 hover:bg-emerald-700 hover:text-white border-b border-slate-700">Descargar Excel (XLS)</button>
-    <button id="btnDescargarPDF" class="block w-full text-left px-4 py-2 text-xs text-slate-300 hover:bg-emerald-700 hover:text-white border-b border-slate-700">Descargar PDF</button>
-    <button id="btnCerrarTabla" class="block w-full text-left px-4 py-2 text-xs text-slate-300 hover:bg-red-700 hover:text-white">Cerrar Tabla</button>
-</div>
-    </div>
-
-    <!-- Tabla -->
-    <div class="overflow-x-auto max-h-64 overflow-y-auto mt-8">
-        <table class="w-full text-left text-xs text-slate-300">
-            <thead class="border-b border-slate-700 text-emerald-400">
-                <tr><th class="p-2">Año</th><th class="p-2">Patrimonio</th><th class="p-2">Depósitos</th></tr>
-            </thead>
-            <tbody id="cuerpoTabla"></tbody>
-        </table>
-    </div>
-</div>
+                <div id="contenedorTabla" class="hidden mt-6 bg-slate-950 p-4 rounded-xl border border-slate-700 relative">
+                    <div class="absolute top-2 right-2 z-20">
+                        <button id="btnMenuAcciones" class="text-slate-400 hover:text-white p-2 bg-slate-800 rounded-lg border border-slate-600">☰</button>
+                        <div id="menuAcciones" class="hidden absolute right-0 mt-2 w-40 bg-slate-800 border border-slate-700 rounded-lg shadow-xl z-50">
+                            <button id="btnDescargarCSV" class="block w-full text-left px-4 py-2 text-xs text-slate-300 hover:bg-emerald-700 hover:text-white border-b border-slate-700">Descargar CSV</button>
+                            <button id="btnDescargarXLS" class="block w-full text-left px-4 py-2 text-xs text-slate-300 hover:bg-emerald-700 hover:text-white border-b border-slate-700">Descargar Excel (XLS)</button>
+                            <button id="btnDescargarPDF" class="block w-full text-left px-4 py-2 text-xs text-slate-300 hover:bg-emerald-700 hover:text-white border-b border-slate-700">Descargar PDF</button>
+                            <button id="btnCerrarTabla" class="block w-full text-left px-4 py-2 text-xs text-slate-300 hover:bg-red-700 hover:text-white">Cerrar Tabla</button>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto max-h-64 overflow-y-auto mt-8">
+                        <table class="w-full text-left text-xs text-slate-300">
+                            <thead class="border-b border-slate-700 text-emerald-400">
+                                <tr><th class="p-2">Año</th><th class="p-2">Patrimonio</th><th class="p-2">Depósitos</th></tr>
+                            </thead>
+                            <tbody id="cuerpoTabla"></tbody>
+                        </table>
+                    </div>
+                </div>
             </section>
 
-            <!-- VISUALIZACIÓN Y RESULTADOS (COLUMNA DERECHA) -->
             <section id="panel-resultados" class="lg:col-span-7 flex flex-col gap-6">
-                <!-- Tarjetas KPI -->
                 <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
                     <div class="p-3 bg-slate-900 rounded-xl border border-slate-700/40">
                         <p id="lbl-patrimonio-futuro" class="text-xs uppercase tracking-wider text-slate-400 font-medium">Patrimonio Estimado (Futuro)</p>
@@ -204,7 +169,6 @@
                         <h3 class="text-xl md:text-2xl font-black text-cyan-400 mt-1 font-mono" id="resRetiro">$0.00</h3>
                     </div>
                 </div>
-            <!-- NUEVO BLOQUE: ESCENARIOS DE ESTRÉS -->
                 <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl text-center">
                     <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Análisis de Sensibilidad (Escenarios)</h3>
                     <div class="grid grid-cols-3 gap-3">
@@ -221,21 +185,14 @@
                             <span id="resOptimista" class="text-sm font-bold font-mono text-emerald-300">$0.00</span>
                         </div>
                     </div>
-                </div>    
-
-                <!-- Gráfico y Bloque Mensaje Informativo -->
+                </div>
                 <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700 shadow-xl flex flex-col justify-center">
                     <h3 id="lbl-proyeccion-graf" class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Proyección Internacional del Capital</h3>
-                    
                     <div class="relative w-full h-64 md:h-80">
                         <canvas id="graficoPatrimonio"></canvas>
                     </div>
-
-                    <!-- Mensaje Informativo Rediseñado -->
                     <div id="contenedorMensajes" class="hidden mt-6 bg-slate-900/90 p-6 rounded-xl border border-emerald-500/30 shadow-2xl tracking-wide">
-                        <h2 id="msgTituloResultado" class="text-center text-lg font-bold text-emerald-400 mb-4 uppercase tracking-widest font-sans">
-                            Resumen de la Proyección Financiera
-                        </h2>
+                        <h2 id="msgTituloResultado" class="text-center text-lg font-bold text-emerald-400 mb-4 uppercase tracking-widest font-sans">Resumen de la Proyección Financiera</h2>
                         <div class="text-center text-base text-slate-200 mb-6 font-medium flex flex-wrap justify-center items-center gap-2">
                             <span id="msgEn">Bajo este esquema de simulación a</span> 
                             <span id="resAnios" class="bg-slate-950 px-3 py-1.5 rounded-lg text-emerald-400 font-black border border-slate-800">30</span> 
@@ -251,27 +208,19 @@
         </div>
     </main>
 
-
-    <!-- FOOTER MEJORADO -->
-    <footer class="mt-auto py-6 bg-slate-900 border-t border-slate-800">
-        <div class="container mx-auto px-6 text-center text-slate-300">
-            <h3 id="lbl-footer" class="text-lg font-semibold text-emerald-400 mb-2">
-                ¿Por qué usar nuestro Simulador de Inversión Global?
-            </h3>
+    <footer class="mt-auto py-6 bg-slate-900 border-t border-slate-800 w-full">
+        <div class="max-w-6xl mx-auto px-6 text-center text-slate-300">
+            <h3 id="lbl-footer" class="text-lg font-semibold text-emerald-400 mb-2">¿Por qué usar nuestro Simulador de Inversión Global?</h3>
             <p class="max-w-4xl mx-auto text-sm leading-relaxed">
                 La planificación financiera es el primer paso hacia la libertad económica. El interés compuesto es conocido como la "octava maravilla del mundo" porque permite que tu dinero trabaje para ti de forma exponencial. Nuestra herramienta te ayuda a visualizar cómo pequeñas aportaciones constantes, combinadas con una estrategia de ahorro inteligente, pueden transformar tu futuro patrimonial. Al proyectar tu capital a largo plazo, puedes ajustar variables clave como la tasa de retorno, la inflación y la frecuencia de tus inversiones, permitiéndote tomar decisiones informadas sobre tu jubilación o metas de ahorro a mediano y largo plazo.
             </p>
-            <p class="text-xs text-slate-500 mt-4">
-                Creado por Leandro Rodriguez Dulcey - © 2026
-            </p>
+            <p class="text-xs text-slate-500 mt-4">Creado por Leandro Rodriguez Dulcey - © 2026</p>
         </div>
     </footer>
-<!-- Botón Flotante Volver al Inicio -->
+
     <button id="btnVolverArriba" class="fixed bottom-6 right-6 hidden bg-slate-800 border border-slate-600 text-slate-300 px-4 py-3 rounded-lg shadow-2xl hover:bg-emerald-700 hover:text-white transition-all duration-300 flex items-center gap-2 z-50 font-bold uppercase text-xs tracking-widest">
         <span>▲</span> Volver al inicio
     </button>
-
     <script src="app.js"></script>
-
 </body>
 </html>
