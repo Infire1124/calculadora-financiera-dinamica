@@ -430,6 +430,16 @@ btnVolver.addEventListener('click', () => {
         behavior: 'smooth'
     });
 });
-// Carga Inicial Limpia
+// Carga Inicial en 0
+inputInvInicial.value = 0;
+sliderFase1.value = 0;
+sliderFase2.value = 0;
+sliderFase3.value = 0;
+selectFrecuenciaExtra.value = "999";
+inputMontoExtra.value = 0;
+inputAnos.value = 0;
+inputInteres.value = 0;
+inputInflacion.value = 0;
+
 localizarInterfaz();
 calcularProyeccion();
